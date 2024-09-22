@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/external.css">
+    <title>Upload Image</title>
+</head>
+<body>
+  
+  <header class="head ">
+    <div class="background">
+    <nav class="navbar h-nav-resp">
+      <ul class="nav-list v-class-resp">
+        <div class="logo logo-click"><img src="../static/IMG/logo1.png" alt="logo"></div>
+        <li> <a href="/">Home</a></li>
+        <li><a href="/checkup">CheckUp</a></li>
+        <li><a href="#aboutus">AboutUs</a></li>
+      </ul>
+      <button id="popupBtn" class="v-class-resp">Sign In / Login</button>
+      <div class="burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </nav>
+    </div>
+  </head>
+  <main>
+   <h3>Step-2</h3>
+   <h4>Here in step-2 post the external condition of you breast with the help of any device camera.</h4>
+   <h4 class="h4-gap">Points to be considered for the image:</h4>
+ 
+   <ol type="1">
+    <li>1. Make sure the picture is clear</li>
+    <li>2. Tie or put your hair at your back</li>
+    <li>3. For better examination, you can send an image of each breast at a time or only the affected side of your breast.</li>
+</ol>
+  
+</main>
+  
+    
+  <div class="upload">
+    <div class="circle-elements">
+    <h2>Upload the Image here</h2>
+      <form id = 'form_up'action="/upload" method="POST" enctype="multipart/form-data">
+          <input id="img_" type="file" name="image" accept="image/*" required>
+          <button type="submit">Upload</button>
+      </form>
+      <div id="response"></div> 
+    </div>
+    </div>
+    <footer> 
+      <div class="footer-box">
+        <div class="first-c">
+          <h3>CELLS CHECKUP</h3>
+          <p>Our strength lies not only in the words we stand by, but most importantly in 
+            the actions of our initiatives.</p>
+        </div>
+        <div class="second-c">
+          <h4>Contact Info</h4>
+          <p>Email-Id : cellcheckup123@gmail.com</p>
+          <p>Phone Number : +91 00001 28999</p>
+        </div>
+        <div class="third-c">
+          <h4>Follow Us</h4>
+          <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a>
+            
+        </div>
+        <div class="fourth-c"></div>
+      </div>
+  </footer>
+    <script>
+      document.getElementById('form_up').addEventListener('submit', function(event){
+        event.preventDefault();
+        const formData = new FormData();
+        const imageFile = document.getElementById('img_').files[0];
+        if (imageFile){
+          formData.append('image', imageFile);
+          fetch('/upload', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('response').innerHTML = ` <h3> Prediction Result:</h3> 
+            <p>${data.prediction === 'y'? 'Tumor Detected': 'No Tumor Detected'} <br> <button class='button' onclick=\"window.location.href='/step3'\"><span>Step 3</span></button>`;
+          })
+          .catch(error => {
+            console.error('Error: ', error);
+            document.getElementById('response').innerHTML = "<p>There was an error processing your request.</p>";
+          });
+        }else{
+          alert('Please select an image file to upload. ');
+        }
+      });
+    </script>
+</body>
+</html>

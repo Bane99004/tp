@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+body{
+  position: relative;
+  width: 100%;
+}
+main{
+  background-color:  #1a2b3b;
+  height: 74vh;
+  border-bottom-right-radius: 50%;
+  font-family: "Kumbh Sans", sans-serif;
+}
+main h3,h4, li{
+  margin-left: 3%;
+  background:linear-gradient(45deg, #e83c29, #e5b891,#e1ad80);
+  background-clip: text;
+  color: transparent;
+  
+}
+main h3{
+  font-size: 50px;
+  background:linear-gradient(45deg, #e83c29, #d99d69,#e1ad80);
+  background-clip: text;
+  color: transparent;
+  padding-top: 70px;
+  width:300px
+}
+main h4{
+  font-size: 30px;
+  padding-top: 10px;
+}
+.h4-gap{
+  padding-top: 10px;
+}
+main li{
+  font-size: 20px;
+  padding-top: 10px;
+  width: 600px;
+  
+}
+main ol{
+  list-style: decimal;
+}
+
+  .upload {
+    position: absolute;
+    width: 50%; 
+    max-width: 550px;
+    left: 68%;
+    transform: translateX(-32%); 
+    top:300px;
+}
+
+.circle-elements{
+  height: 440px;
+    width: 78%;
+    background-color: aliceblue;
+    border: 20px solid, #1a2b3b;
+    border-radius: 50%;
+    padding-top: 150px;
+    padding-left: 20%;
+}
+.circle-elements h2{
+  font-size: 30px;
+  margin-left: -17px;
+  margin-bottom: 80px;
+
+  border: 8px dotted,#1a2b3b;
+  width: 310px;
+  padding-left: 15px;
+}
+#form_up{
+  width: 300px;
+  margin-left:-11px ;
+}
+#img_{
+  font-size: 20px;
+}
+#form_up input[type="file"] {
+  cursor: pointer;
+  
+}
+#form_up button{
+  background: linear-gradient(45deg, #e74c3c, #e67e22);
+  color: white;
+  border: none;
+  padding: 13px 30px;
+  cursor: pointer;
+  margin-top: 45px;
+  margin-left: 15px;
+  width: 300px;
+  font-size: 18px;
+}
+button:hover {
+  transform: scale(1.01);
+  background: linear-gradient(45deg, #e67e22, #e74c3c);
+}
+#response{
+  font-size: 20px;
+
+}
+.button{
+  font-size: 16px;
+  color: #1a2b3b;
+  border-color: #1a2b3b;
+  margin-top: 20px;
+}
+.button:hover{
+  color: white;
+  border-color: white;
+  transition: 0.2ms;
+}
+
+.navbar{
+  position: static;
+}
+footer{
+  
+  margin-top: 350px;
+}
