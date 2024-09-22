@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/examine.css">
+    
+    <script>
+      var currentSymptom = 1 
+      var yesCount = 0 
+        function submitResponse() {
+
+          
+            var form = document.getElementById('response-form');
+            var formData = new FormData(form);
+            formData.append('current_symptom', currentSymptom)
+            const data = {};
+	            for (let keyValue of formData.values()) {
+                if (keyValue == 'yes'){
+                  yesCount += 1
+                }
+              }
+            formData.append('yes_count',yesCount)
+            var params = new URLSearchParams(formData).toString();
+            
+            fetch('/update?' + params, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result) {
+                    document.getElementById('chat-box').innerHTML = "<h5><strong>" + data.result + "</strong></h5>" + "<button class='button' onclick=\"window.location.href='/external'\">" +"<span>Step 2</span></button>";
+                } else {
+                    document.getElementById('question').innerText = data.question;
+                    currentSymptom = data.current_symptom
+                    
+                }
+            });
+            form.reset()
+            
+            return false; // Prevent the form from submitting the traditional way
+        }
+    </script>
+</head>
+<body>
+  <header class="head ">
+    <div class="background">
+    <nav class="navbar h-nav-resp">
+      <ul class="nav-list v-class-resp">
+        <div class="logo logo-click"><img src="../static/IMG/logo1.png" alt="logo"></div>
+        <li> <a href="/">Home</a></li>
+        <li><a href="/checkup">CheckUp</a></li>
+        <li><a href="#aboutus">AboutUs</a></li>
+      </ul>
+      <button id="popupBtn" class="v-class-resp">Sign In / Login</button>
+      <div class="burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </nav>
+    </div>
+  </head>
+  <main>
+    <div class="intro-chat">
+      <p >Hello there,</p>
+      <h5>you can do a basic examination of the breast condition here ..</h5>
+      <p class="step3">Did Step-1 & Step-2 and want to submit sonograms <br> click below</p>
+      <button class="button button2"onclick="window.location.href= '/step3'"><span>Step 3</span></button>
+    </div>
+
+    <div id="chat-box">
+        <h5>If you are going through same symptoms the choose 'Yes'</h5>
+        <p id="question"> {{question}}</p>
+        <form id="response-form" onsubmit="return submitResponse()">
+          <div class="input">
+          <input type="radio" id="yes" name="response" value="yes">
+          <label for="yes">Yes</label>
+          
+          <input type="radio" id="no" name="response" value="no">
+          <label id="no-btn" for="no">No</label>
+
+        </div>
+        <div class="button-sub">
+          <button type="submit" >Submit</button>
+        </div>
+        </form>
+        <h5></h5>
+    </div>
+    
+  </main>
+  </header>
+  <footer> 
+    <div class="footer-box">
+      <div class="first-c">
+        <h3>CELLS CHECKUP</h3>
+        <p>Our strength lies not only in the words we stand by, but most importantly in 
+          the actions of our initiatives.</p>
+      </div>
+      <div class="second-c">
+        <h4>Contact Info</h4>
+        <p>Email-Id : cellcheckup123@gmail.com</p>
+        <p>Phone Number : +91 00001 28999</p>
+      </div>
+      <div class="third-c">
+        <h4>Follow Us</h4>
+        <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a>
+          
+      </div>
+      <div class="fourth-c"></div>
+    </div>
+</footer>
+</body>
+</html>
